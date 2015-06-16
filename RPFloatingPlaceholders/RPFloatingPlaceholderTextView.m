@@ -176,7 +176,11 @@
     // Setup default colors for the floating label states
     UIColor *defaultActiveColor;
     if ([self respondsToSelector:@selector(tintColor)]) {
+#ifdef IS_APP_EXTENSION
+        defaultActiveColor = self.tintColor;
+#else
         defaultActiveColor = self.tintColor ?: [[[UIApplication sharedApplication] delegate] window].tintColor;
+#endif
     } else {
         // iOS 6
         defaultActiveColor = [UIColor blueColor];
